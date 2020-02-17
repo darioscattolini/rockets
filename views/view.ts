@@ -1,0 +1,1 @@
+export const state = <HTMLDivElement>document.querySelector("#state");
