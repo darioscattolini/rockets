@@ -12,10 +12,39 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="py-4">Rockets</h1>
-
-        <div id="state"></div>
+    <header>
+        <h1 class="container py-4 px-5">Rockets</h1>
+    </header>
+    <div class="container px-5">
+        <div class="row mx-n5">
+            <div class="control col-4 px-5">
+                <table class="w-100">
+                    <tr class="text-center">
+                        <th>Rocket 1</th>
+                        <th>Rocket 2</th>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-primary w-100" id="create1">Create</button></td>
+                        <td><button type="button" class="btn btn-primary w-100" id="create2" disabled>Create</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-primary w-100" id="accelerate1" disabled>Accelerate</button></td>
+                        <td><button type="button" class="btn btn-primary w-100" id="accelerate2" disabled>Accelerate</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-primary w-100" id="break1" disabled>Break</button></td>
+                        <td><button type="button" class="btn btn-primary w-100" id="break2" disabled>Break</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="btn btn-primary w-100" id="showInfo1" disabled>Show info</button></td>
+                        <td><button type="button" class="btn btn-primary w-100" id="showInfo2" disabled>Show info</button></td>
+                    </tr>
+                </table>
+                <button type="button" class="btn btn-primary w-100" id="showInfoAll" disabled>Show all rockets info</button>
+            </div>
+            
+            <div id="state" class="col-8 px-5"></div>
+        </div>
     </div>
 
     <script src="../bundle.js"></script>

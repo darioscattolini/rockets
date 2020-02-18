@@ -77,6 +77,17 @@ var Rocket = /** @class */ (function () {
 var rockets = [];
 
 var state = document.querySelector("#state");
+var control = {
+    create1: document.querySelector("#create1"),
+    create2: document.querySelector("#create2"),
+    accelerate1: document.querySelector("#accelerate1"),
+    accelerate2: document.querySelector("#accelerate2"),
+    break1: document.querySelector("#break1"),
+    break2: document.querySelector("#break2"),
+    showInfo1: document.querySelector("#showInfo1"),
+    showInfo2: document.querySelector("#showInfo2"),
+    showInfoAll: document.querySelector("#showInfoAll")
+};
 
 var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
@@ -86,7 +97,7 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
     return r;
 };
 function retrieveRocketInfo(rocket) {
-    state.innerHTML += "<div>\n                            Rocket: " + rocket.getCode() + "\n                            <ul>\n                                <li>Amount of thrusters: " + rocket.getThrustersAmount() + "</li>\n                                <li>Max power of thrusters: " + rocket.getThrustersMaxPower().join(", ") + "</li>\n                                <li>Current power of thrusters: " + rocket.getThrustersCurrentPower().join(", ") + "</li>\n                                <li>Current speed: " + rocket.getSpeed() + "</li>\n                            </ul>\n                        </div>";
+    return "<div>\n                Rocket: " + rocket.getCode() + "\n                <ul>\n                    <li>Amount of thrusters: " + rocket.getThrustersAmount() + "</li>\n                    <li>Max power of thrusters: " + rocket.getThrustersMaxPower().join(", ") + "</li>\n                    <li>Current power of thrusters: " + rocket.getThrustersCurrentPower().join(", ") + "</li>\n                    <li>Current speed: " + rocket.getSpeed() + "</li>\n                </ul>\n            </div>";
 }
 function createRocket(code) {
     var thrustersMaxPowers = [];
@@ -100,33 +111,41 @@ function createRocket(code) {
         console.error("You can't create more than 99999999 rockets.");
     }
 }
-createRocket("32WESSDS", 10, 30, 80);
-createRocket("LDSFJA32", 30, 40, 50, 50, 30, 10);
-for (var _i = 0, rockets_1 = rockets; _i < rockets_1.length; _i++) {
-    var rocket = rockets_1[_i];
-    retrieveRocketInfo(rocket);
-    for (var i = 0; i < 3; i++) {
-        rocket.accelerate();
+control.create1.onclick = function () {
+    createRocket("32WESSDS", 10, 30, 80);
+    control.create2.removeAttribute("disabled");
+};
+control.create2.onclick = function () {
+    createRocket("LDSFJA32", 30, 40, 50, 50, 30, 10);
+    for (var buttonName in control) {
+        var button = control[buttonName];
+        if (button.hasAttribute("disabled")) {
+            button.removeAttribute("disabled");
+        }
     }
-}
-for (var _a = 0, rockets_2 = rockets; _a < rockets_2.length; _a++) {
-    var rocket = rockets_2[_a];
-    retrieveRocketInfo(rocket);
-}
-for (var i = 0; i < 5; i++) {
-    rockets[0].break();
-}
-for (var i = 0; i < 7; i++) {
+};
+control.accelerate1.onclick = function () {
+    rockets[0].accelerate();
+};
+control.accelerate2.onclick = function () {
     rockets[1].accelerate();
-}
-for (var _b = 0, rockets_3 = rockets; _b < rockets_3.length; _b++) {
-    var rocket = rockets_3[_b];
-    retrieveRocketInfo(rocket);
-    for (var i = 0; i < 15; i++) {
-        rocket.accelerate();
+};
+control.break1.onclick = function () {
+    rockets[0].break();
+};
+control.break2.onclick = function () {
+    rockets[1].break();
+};
+control.showInfo1.onclick = function () {
+    state.innerHTML = retrieveRocketInfo(rockets[0]);
+};
+control.showInfo2.onclick = function () {
+    state.innerHTML = retrieveRocketInfo(rockets[1]);
+};
+control.showInfoAll.onclick = function () {
+    state.innerHTML = "";
+    for (var _i = 0, rockets_1 = rockets; _i < rockets_1.length; _i++) {
+        var rocket = rockets_1[_i];
+        state.innerHTML += retrieveRocketInfo(rocket);
     }
-}
-for (var _c = 0, rockets_4 = rockets; _c < rockets_4.length; _c++) {
-    var rocket = rockets_4[_c];
-    retrieveRocketInfo(rocket);
-}
+};
